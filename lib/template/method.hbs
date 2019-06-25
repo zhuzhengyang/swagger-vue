@@ -30,6 +30,8 @@ export const {{&methodName}} = function(parameters = {}) {
     {{#isBodyParameter}}
         if(parameters['{{&camelCaseName}}'] !== undefined) {
             body = parameters['{{&camelCaseName}}']
+        }else{
+            body = parameters
         }
     {{/isBodyParameter}}
 
@@ -40,7 +42,7 @@ export const {{&methodName}} = function(parameters = {}) {
     {{/isFormParameter}}
 
     {{#required}}
-        if(parameters['{{&camelCaseName}}'] === undefined) {
+        if('{{&camelCaseName}}' !== 'body' && parameters['{{&camelCaseName}}'] === undefined) {
             return Promise.reject(new Error('Missing required {{&paramType}} parameter: {{&camelCaseName}}'))
         }
     {{/required}}
